@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (raw/processed can be large or sensitive - track selectively)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Jupyter
+*.ipynb_checkpoints
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
