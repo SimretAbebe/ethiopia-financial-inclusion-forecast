@@ -1,0 +1,147 @@
+from src import data_enricher as enrich
+
+COLLECTED_BY = "The Project Owner"
+COLLECTION_DATE = "2026-07-17"
+
+
+def get_new_observations():
+    return [
+        enrich.new_observation(
+            pillar="ACCESS",
+            indicator="Fayda Digital ID Enrollment",
+            indicator_code="ACC_FAYDA",
+            value_numeric=25_000_000,
+            unit="people",
+            observation_date="2025-09-01",
+            source_name="Shega News",
+            source_url="https://shega.co/news/fayda-digital-id-to-become-mandatory-for-banking-services-as-ethiopia-begins-nationwide-account-harmonization",
+            confidence="high",
+            original_text="As of September 2025, Fayda digital ID enrollment stands at 25 million",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Replaces earlier non-approved source; Shega is on the approved Ethiopia source list.",
+        ),
+        enrich.new_observation(
+            pillar="USAGE",
+            indicator="Total Bank Accounts and Mobile Wallets",
+            indicator_code="USG_TOTAL_ACCOUNTS_WALLETS",
+            value_numeric=272_000_000,
+            unit="accounts",
+            observation_date="2025-09-01",
+            source_name="Shega News",
+            source_url="https://shega.co/news/fayda-digital-id-to-become-mandatory-for-banking-services-as-ethiopia-begins-nationwide-account-harmonization",
+            confidence="medium",
+            original_text="the number of bank accounts in Ethiopia and mobile wallets had reached 272 million",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Same approved source as above, same article - counts accounts/wallets, not unique users, so treat as a context indicator, not a direct Findex proxy.",
+        ),
+        enrich.new_observation(
+            pillar="USAGE",
+            indicator="Annual Digital Transaction Value",
+            indicator_code="USG_DIGITAL_TXN_VALUE",
+            value_numeric=9_700_000_000_000,
+            unit="ETB",
+            observation_date="2024-07-01",
+            period_start="2023-07-01",
+            period_end="2024-06-30",
+            source_name="National Bank of Ethiopia",
+            source_url="https://nbe.gov.et/nbe_news/ethiopia-launches-phase-two-of-national-digital-payments-strategy-building-on-strong-momentum-from-phase-one/",
+            confidence="high",
+            original_text="In the 2023/24 fiscal year, Ethiopia recorded a substantial 9.7 trillion Birr in digital transactions, exceeding cash transactions",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Already an approved nbe.gov.et source - unchanged from before.",
+        ),
+    ]
+
+
+def get_new_events():
+    return [
+        enrich.new_event(
+            record_id="EVT_0011",
+            category="regulation",
+            indicator="NBE Payment Instrument Issuer Interoperability Directive (ONPS/10/2025)",
+            observation_date="2025-05-12",
+            source_name="National Bank of Ethiopia",
+            source_url="https://nbe.gov.et/files/onps-10-2025-oversight-of-the-natioanl-payment-system-licensing-and-authorization-of-payment-instrument-issuer-amendment-directive/",
+            confidence="high",
+            original_text="Oversight of the National Payment System Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Replaces the addisinsight.net citation with the official nbe.gov.et directive page directly.",
+        ),
+        enrich.new_event(
+            record_id="EVT_0012",
+            category="policy",
+            indicator="National Digital Payments Strategy Phase Two (NDPS 2.0) Launch",
+            observation_date="2025-04-03",
+            source_name="National Bank of Ethiopia",
+            source_url="https://nbe.gov.et/nbe_news/ethiopia-launches-phase-two-of-national-digital-payments-strategy-building-on-strong-momentum-from-phase-one/",
+            confidence="high",
+            original_text="Phase Two of the Strategy (2025-2029) will focus on deepening usage of digital payments, ensuring full interoperability, expanding digital ID integration...",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Already an approved nbe.gov.et source - unchanged from before.",
+        ),
+        enrich.new_event(
+            record_id="EVT_0013",
+            category="policy",
+            indicator="Fayda-Bank Account Mandatory Linkage (Verifayda 2 Migration)",
+            observation_date="2026-01-08",
+            source_name="Shega News",
+            source_url="https://shega.co/news/fayda-digital-id-to-become-mandatory-for-banking-services-as-ethiopia-begins-nationwide-account-harmonization",
+            confidence="high",
+            original_text="Addis Ababa, Dire Dawa, and regional administration capital cities have been given a shorter timeline, with a deadline of January 8, 2026",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Replaces the unsourced federal-agency-mandate event with a properly-sourced Fayda/banking event from the approved list.",
+        ),
+    ]
+
+
+def get_new_impact_links():
+    return [
+        enrich.new_impact_link(
+            parent_id="EVT_0011",
+            pillar="USAGE",
+            related_indicator="USG_P2P_COUNT",
+            relationship_type="direct",
+            impact_direction="increase",
+            impact_magnitude="high",
+            lag_months=6,
+            evidence_basis="literature",
+            confidence="medium",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Mandatory interoperability removes friction for cross-platform P2P transfers.",
+        ),
+        enrich.new_impact_link(
+            parent_id="EVT_0004",
+            pillar="ACCESS",
+            related_indicator="ACC_FAYDA",
+            relationship_type="direct",
+            impact_direction="increase",
+            impact_magnitude="high",
+            lag_months=12,
+            evidence_basis="empirical",
+            confidence="high",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Supported by shega.co-confirmed enrollment growth to 25M by Sept 2025 following the Fayda rollout.",
+        ),
+        enrich.new_impact_link(
+            parent_id="EVT_0013",
+            pillar="ACCESS",
+            related_indicator="ACC_ACCOUNT_OWNERSHIP",
+            relationship_type="direct",
+            impact_direction="increase",
+            impact_magnitude="medium",
+            lag_months=3,
+            evidence_basis="empirical",
+            confidence="medium",
+            collected_by=COLLECTED_BY,
+            collection_date=COLLECTION_DATE,
+            notes="Mandatory Fayda-bank linkage pushes unregistered account holders to register for Fayda, indirectly reinforcing Access measurement/verification.",
+        ),
+    ]
