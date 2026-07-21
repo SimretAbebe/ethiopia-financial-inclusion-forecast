@@ -31,3 +31,21 @@ def load_all():
         "impact": load_impact_sheet(),
         "reference": load_reference_codes(),
     }
+
+def load_findex(filepath: str | None = None) -> pd.DataFrame:
+    """Load the raw Findex dataset (historic indicator table).
+
+    Parameters
+    ----------
+    filepath : str | None
+        Optional path to an alternative Excel file. If omitted the project‑wide
+        ``config.UNIFIED_DATA_FILE`` is used.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing the raw Findex rows (columns include at least
+        ``year``, ``indicator`` and ``value``).
+    """
+    path = filepath or config.UNIFIED_DATA_FILE
+    sheet = config.SHEET_MAIN
