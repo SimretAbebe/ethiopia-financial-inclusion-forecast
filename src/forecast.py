@@ -82,8 +82,9 @@ def add_event_effects(trend_forecast: pd.DataFrame, indicator_code, impact_df, e
 # 3. Scenario generation
 
 SCENARIO_STRENGTH = {
-    "base": 1.0,          
-    "optimistic": 1.7,   
+    "pessimistic": 0.3,
+    "base": 1.0,
+    "optimistic": 1.7,
 }
 
 

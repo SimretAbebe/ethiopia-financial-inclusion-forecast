@@ -43,3 +43,11 @@ README.md
 ```bash
 pip install -r requirements.txt
 ```
+
+## Running the Dashboard
+```bash
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
+Opens automatically at http://localhost:8501. Navigate between Overview, Trends,
+Forecasts, and Inclusion Projections using the sidebar.
